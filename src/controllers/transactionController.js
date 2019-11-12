@@ -8,8 +8,6 @@ const from = process.env.TWILLO_NUMBER;
 const client = require('twilio')(accountSid, authToken);
 
 
-console.log(' detail', from);
-
 class TransactionController {
   static async transferFund (req, res){
     try {
@@ -54,7 +52,33 @@ class TransactionController {
 
 
   }
+  static async verifyTransfer (req, res){
+    try{
+      const { OTP } = req.body;
+      const pendingTransaction = await Transaction.findOne({ OTP , isVerified: false });
+      
 
+      if (pendingTransaction){
+        const { _id } = pendingTransaction;
+        await Transaction.updateOne({_id}, { isVerified:true });
+
+        return res.status(200).json({
+          status: 200,
+          message: 'Transaction completed succcesfully'
+        })
+      } else {
+        return res.status(400).json({
+          status: 400,
+          message: 'Invalid OTP, please enter a valid OTP'
+        });
+      }
+    }catch(error){
+      return res.status(500).json({
+        status: 500,
+        error: error.message
+      });
+    }
+  }
 
 }
 export default TransactionController;

@@ -1,7 +1,6 @@
 import '@babel/polyfill';
 import 'dotenv/config';
 import express from 'express';
-// import bodyParser from 'body-parser';
 import router from './src/routes/index';
 import './src/db/config';
 
