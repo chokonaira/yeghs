@@ -1,0 +1,44 @@
+{
+  "name": "yeghs",
+  "version": "1.0.0",
+  "description": "A transaction service application",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --require @babel/register app.js",
+    "start": "node --require @babel/register app.js",
+    "seed": "node --require @babel/register ./src/db/seeder/user.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chokonaira/yeghs.git"
+  },
+  "author": "Henry Okonkwo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chokonaira/yeghs/issues"
+  },
+  "homepage": "https://github.com/chokonaira/yeghs#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "cryptr": "^6.0.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.9",
+    "nexmo": "^2.5.1",
+    "socket.io": "^2.3.0",
+    "twilio": "^3.37.0",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/polyfill": "^7.7.0",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/register": "^7.7.0",
+    "@babel/runtime": "^7.7.2",
+    "nodemon": "^1.19.4"
+  }
+}
