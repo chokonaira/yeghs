@@ -3,6 +3,7 @@ import 'dotenv/config';
 import express from 'express';
 import router from './src/routes/index';
 import './src/db/config';
+import './src/cron-man/cronMan';
 
 
 

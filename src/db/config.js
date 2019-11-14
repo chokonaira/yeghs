@@ -13,7 +13,7 @@ mongoose.connection.on('error', () => {
 const containerUri = process.env.MONGODB_URI;
    ( async function(){
     try {
-      await mongoose.connect(containerUri, { useNewUrlParser: true, useUnifiedTopology: true });
+      await mongoose.connect(containerUri, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
     } catch (error) {
       console.log(error);
     }
