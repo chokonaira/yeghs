@@ -1,4 +1,4 @@
-import { validationResult } from 'express-validator';
+import { validationResult } from "express-validator";
 
 const validate = (req, res, next) => {
   const errorFormatter = ({ msg }) => `${msg}`;
@@ -9,7 +9,7 @@ const validate = (req, res, next) => {
 
     return res.status(400).json({
       status: 400,
-      message: errorMsg,
+      message: errorMsg
     });
   }
   return next();

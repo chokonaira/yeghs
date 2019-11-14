@@ -1,45 +1,57 @@
-import { body, check } from 'express-validator';
+import { body, check } from "express-validator";
 
 const userValidator = {
   passwordValidator: [
-    body('password')
+    body("password")
       .trim()
       .exists({ checkFalsy: true })
-      .withMessage('Password is required.')
+      .withMessage("Password is required.")
       .isLength({ min: 5, max: 10 })
-      .withMessage('Password must be between 5 to 10 characters long.')
+      .withMessage("Password must be between 5 to 10 characters long.")
       .isAlphanumeric()
-      .withMessage('Password must be alphanumeric.'),
+      .withMessage("Password must be alphanumeric.")
+  ],
+  pinValidator: [
+    body("authorizationPin")
+      .trim()
+      .exists({ checkFalsy: true })
+      .withMessage("Pin is required.")
+      .isNumeric()
+      .withMessage("Pin must be digits.")
+      .isLength({ min: 4, max: 4 })
+      .withMessage("Pin must be 4 digits.")
   ],
   phoneValidator: [
-    body('phone')
+    body("phone")
       .trim()
       .exists({ checkFalsy: true })
-      .withMessage('Phone number is required.')
+      .withMessage("Phone number is required.")
       .isNumeric()
-      .withMessage('Phone number must be numeric.')
+      .withMessage("Phone number must be numeric.")
       .isLength({ min: 13, max: 13 })
-      .withMessage('Phone number must be 13 digits starting with country code, eg: 234.'),
+      .withMessage(
+        "Phone number must be 13 digits starting with country code, eg: 234."
+      )
   ],
   emailValidator: [
-    check('email')
+    check("email")
       .trim()
       .exists({ checkFalsy: true })
-      .withMessage('Email is required.')
+      .withMessage("Email is required.")
       .isEmail()
       .normalizeEmail()
-      .withMessage('Invalid email address.'),
+      .withMessage("Invalid email address.")
   ],
   usernameValidator: [
-    body('username')
+    body("username")
       .trim()
       .exists({ checkFalsy: true })
-      .withMessage('Username is required.')
+      .withMessage("Username is required.")
       .matches(/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/)
-      .withMessage('Invalid username.')
+      .withMessage("Invalid username.")
       .isLength({ min: 5, max: 10 })
-      .withMessage('Username must be between 5 and 10 characters.'),
-  ],
+      .withMessage("Username must be between 5 and 10 characters.")
+  ]
 };
 
 export default userValidator;

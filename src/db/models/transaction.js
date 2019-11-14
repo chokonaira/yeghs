@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 const transactionSchema = new Schema({
   amount: String,
@@ -10,4 +10,4 @@ const transactionSchema = new Schema({
   OTP: String
 });
 
-module.exports = model('Transaction', transactionSchema);
+module.exports = model("Transaction", transactionSchema);

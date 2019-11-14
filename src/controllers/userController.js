@@ -1,6 +1,9 @@
 import bcrypt from "bcrypt";
+import Cryptr from "cryptr";
+const cryptr = new Cryptr("myTotalySecretKey");
+
 import { Auth } from "../middlewares/generateToken";
-import User from '../db/models/user';
+import User from "../db/models/user";
 import { hashPassword } from "../helpers/helper";
 
 const { generateToken } = Auth;
@@ -8,9 +11,16 @@ const { generateToken } = Auth;
 class UserController {
   static async userSignup(req, res) {
     try {
-      const { username, email, phone, password } = req.body;
+      const { username, email, phone, authorizationPin, password } = req.body;
+      const encryptedpin = cryptr.encrypt(authorizationPin);
       const hashedpassword = await hashPassword(password);
-      const values = { username, email, phone, password: hashedpassword };
+      const values = {
+        username,
+        email,
+        phone,
+        authorizationPin: encryptedpin,
+        password: hashedpassword
+      };
       const user = new User(values);
       await user.save();
 
@@ -45,11 +55,10 @@ class UserController {
       const result = await User.findOne({ email });
       if (result) {
         if (bcrypt.compareSync(password, result.password)) {
-
           const { username, email } = result;
           const token = await generateToken({ username, email });
 
-          const existingUser = {username, email};
+          const existingUser = { username, email };
 
           return res.status(200).json({
             status: 200,
