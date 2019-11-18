@@ -8,6 +8,7 @@ const {
   amountValidator,
   pinValidator,
   emailValidator,
+  accountNumberValidator,
   OTPValidator
 } = transactionValidator;
 
@@ -16,6 +17,7 @@ const router = express.Router();
 router.post(
   "/transfer",
   amountValidator,
+  accountNumberValidator,
   pinValidator,
   emailValidator,
   validate,
@@ -29,6 +31,12 @@ router.post(
   validate,
   authenticate,
   TransactionController.verifyTransfer
+);
+
+router.get(
+  "/transfer/completed",
+  authenticate,
+  TransactionController.getAllUserTransactions
 );
 
 export default router;

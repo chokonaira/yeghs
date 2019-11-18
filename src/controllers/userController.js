@@ -32,18 +32,20 @@ class UserController {
         .json({
           status: 201,
           message: "Registeration Successful",
-          user: {
+          data: [
+            {
             _id: user._id,
             username: user.username,
             phone: user.phone,
             email: user.email
-          },
+          }
+        ],
           token
         });
     } catch (error) {
       return res.status(500).json({
         status: 500,
-        error: error.message
+        message: error.message
       });
     }
   }
@@ -63,8 +65,8 @@ class UserController {
           return res.status(200).json({
             status: 200,
             message: "User Login successful",
-            existingUser,
-            token
+            token,
+            data: [ existingUser ],
           });
         }
         return res.status(401).json({
@@ -79,7 +81,7 @@ class UserController {
     } catch (error) {
       return res.status(500).json({
         status: 500,
-        error: error.message
+        message: error.message
       });
     }
   }

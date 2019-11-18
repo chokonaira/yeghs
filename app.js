@@ -1,4 +1,5 @@
 import '@babel/polyfill';
+import cors from 'cors';
 import 'dotenv/config';
 import express from 'express';
 import router from './src/routes/index';
@@ -9,6 +10,7 @@ import './src/cron-man/cronMan';
 
 const app = express();
 
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(router);

@@ -1,8 +1,9 @@
 const { Schema, model } = require("mongoose");
 
 const transactionSchema = new Schema({
-  amount: String,
+  amount: Number,
   beneficiaryEmail: String,
+  accountNumber: String,
   transactionDate: Date,
   pin: String,
   senderEmail: String,

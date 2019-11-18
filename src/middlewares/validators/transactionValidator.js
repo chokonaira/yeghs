@@ -20,6 +20,16 @@ const transactionValidator = {
       .normalizeEmail()
       .withMessage("Invalid email address.")
   ],
+  accountNumberValidator: [
+    body("accountNumber")
+      .trim()
+      .exists({ checkFalsy: true })
+      .withMessage("Account Number is required.")
+      .isNumeric()
+      .withMessage("Account Number must be digits.")
+      .isLength({ min: 10, max: 10 })
+      .withMessage("Account Number must be 10 digits.")
+  ],
   pinValidator: [
     body("pin")
       .trim()
